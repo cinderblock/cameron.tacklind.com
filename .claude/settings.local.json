@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun:*)",
+      "Bash(bunx playwright install:*)",
+      "Bash(curl:*)",
+      "Bash(timeout:*)",
+      "Bash(Select-Object Id, ProcessName, StartTime)",
+      "Bash(Format-Table)",
+      "Bash(npm run dev:*)"
+    ]
+  }
+}
