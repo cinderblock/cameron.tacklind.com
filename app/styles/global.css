@@ -26,6 +26,15 @@
   }
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 html {
   font-family: var(--font-sans);
   line-height: 1.6;
