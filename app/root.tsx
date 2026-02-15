@@ -26,6 +26,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta charSet="utf-8" />
         <Meta />
         <Links />
+        {import.meta.env.DEV && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `if(new URLSearchParams(location.search).has('light'))document.documentElement.dataset.forceLight=''`,
+            }}
+          />
+        )}
       </head>
       <body>
         {children}

@@ -17,7 +17,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-force-light]) {
     --color-text: #f0f0f0;
     --color-text-muted: #a0a0b0;
     --color-background: #0f0f1a;
