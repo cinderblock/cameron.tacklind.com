@@ -37,6 +37,13 @@ jobs:
       - name: Build
         run: bun run build
 
+      - name: Debug git status
+        run: |
+          echo "=== git status ==="
+          git status
+          echo "=== git diff --stat ==="
+          git diff --stat
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
