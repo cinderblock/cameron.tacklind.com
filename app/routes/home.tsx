@@ -25,7 +25,7 @@ export default function Home() {
     <main className="container">
       <section className="hero">
         <h1>Cameron Tacklind</h1>
-        <p className="intro">from Motors to React</p>
+        <p className="intro">from Robots to React</p>
         <p className="tagline">
           <span className="tooltip-wrapper">
             <span
