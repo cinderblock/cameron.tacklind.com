@@ -179,8 +179,10 @@ export default function Home() {
               </span>
               <span className="tooltip-row">
                 <span className="tooltip-label first-logo-label">
-                  <img src="/first-logo.png" alt="FIRST" className="first-logo first-logo-light" loading="lazy" />
-                  <img src="/first-logo-dark.png" alt="FIRST" className="first-logo first-logo-dark" loading="lazy" />
+                  <a href="https://www.firstinspires.org/" target="_blank" rel="noopener noreferrer">
+                    <img src="/first-logo.png" alt="FIRST" className="first-logo first-logo-light" loading="lazy" />
+                    <img src="/first-logo-dark.png" alt="FIRST" className="first-logo first-logo-dark" loading="lazy" />
+                  </a>
                 </span>
                 <span className="tooltip-value">
                   <span className="tooltip-wrapper nested">
