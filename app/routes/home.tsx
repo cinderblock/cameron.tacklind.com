@@ -106,8 +106,8 @@ export default function Home() {
               </span>
               <span className="tooltip-row">
                 <span className="tooltip-label first-logo-label">
-                  <img src="/first-logo.png" alt="FIRST" className="first-logo first-logo-light" />
-                  <img src="/first-logo-dark.png" alt="FIRST" className="first-logo first-logo-dark" />
+                  <img src="/first-logo.png" alt="FIRST" className="first-logo first-logo-light" loading="lazy" />
+                  <img src="/first-logo-dark.png" alt="FIRST" className="first-logo first-logo-dark" loading="lazy" />
                 </span>
                 <span className="tooltip-value">
                   <span className="tooltip-wrapper nested">
