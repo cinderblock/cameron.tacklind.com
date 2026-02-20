@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { MetaFunction } from "react-router";
 import { Github, Linkedin, Mail, Facebook, Trophy, Instagram } from "lucide-react";
 
@@ -20,7 +21,79 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+const SPOTS = [
+  { baseX: 25, baseY: 0 },
+  { baseX: 75, baseY: 15 },
+  { baseX: 50, baseY: 85 },
+];
+
+const ALPHA = 0.002;
+const BETA = 0.0004;
+
+function useGradientMouse() {
+  useEffect(() => {
+    let mouseX = 50;
+    let mouseY = 50;
+    const state = SPOTS.map((s) => ({
+      x: s.baseX,
+      y: s.baseY,
+      vx: 0,
+      vy: 0,
+    }));
+    let frameId: number;
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = (e.clientX / window.innerWidth) * 100;
+      mouseY = (e.clientY / window.innerHeight) * 100;
+    };
+
+    const animate = () => {
+      const style = document.documentElement.style;
+
+      for (let i = 0; i < SPOTS.length; i++) {
+        const { baseX, baseY } = SPOTS[i];
+        const s = state[i];
+
+        // Repulsion target
+        const dx = baseX - mouseX;
+        const dy = baseY - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const force = 600 / (dist + 8);
+        const targetX = baseX + (dx / (dist + 1)) * force;
+        const targetY = baseY + (dy / (dist + 1)) * force;
+
+        // Predict
+        const predX = s.x + s.vx;
+        const predY = s.y + s.vy;
+
+        // Correct
+        const resX = targetX - predX;
+        const resY = targetY - predY;
+        s.x = predX + ALPHA * resX;
+        s.y = predY + ALPHA * resY;
+        s.vx += BETA * resX;
+        s.vy += BETA * resY;
+
+        style.setProperty(`--gx${i + 1}`, `${s.x}%`);
+        style.setProperty(`--gy${i + 1}`, `${s.y}%`);
+      }
+
+      frameId = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    frameId = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      cancelAnimationFrame(frameId);
+    };
+  }, []);
+}
+
 export default function Home() {
+  useGradientMouse();
+
   return (
     <main className="container">
       <section className="hero">
