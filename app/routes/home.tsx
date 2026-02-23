@@ -276,7 +276,7 @@ export default function Home() {
           </a>
         </nav>
       </section>
-      <footer className="sticky-footer">FDT</footer>
+      <footer dangerouslySetInnerHTML={{ __html: "<!-- FDT -->" }} />
     </main>
   );
 }
