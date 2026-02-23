@@ -91,6 +91,34 @@ function useGradientMouse() {
   }, []);
 }
 
+function handleTooltipTap(e: React.MouseEvent<HTMLSpanElement>) {
+  const trigger = e.currentTarget;
+
+  // Hide all other tooltips and focus this one
+  document.querySelectorAll(".tooltip-trigger").forEach((el) => {
+    if (el !== trigger && el instanceof HTMLElement) el.blur();
+  });
+  trigger.focus();
+
+  const tooltip = trigger.nextElementSibling as HTMLElement | null;
+  if (!tooltip?.id) return;
+
+  // Position arrow at the tapped word
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const triggerRect = trigger.getBoundingClientRect();
+    const tooltipRect = tooltip.getBoundingClientRect();
+    if (tooltipRect.width === 0) return;
+    const arrowX = triggerRect.left + triggerRect.width / 2 - tooltipRect.left;
+    let styleEl = document.getElementById("tooltip-arrow-style") as HTMLStyleElement | null;
+    if (!styleEl) {
+      styleEl = document.createElement("style");
+      styleEl.id = "tooltip-arrow-style";
+      document.head.appendChild(styleEl);
+    }
+    styleEl.textContent = `#${tooltip.id}::before { left: ${arrowX}px !important; }`;
+  }));
+}
+
 export default function Home() {
   useGradientMouse();
 
@@ -105,6 +133,7 @@ export default function Home() {
               className="tooltip-trigger"
               tabIndex={0}
               aria-describedby="complete-tooltip"
+              onClick={handleTooltipTap}
             >
               Complete
             </span>
@@ -138,6 +167,7 @@ export default function Home() {
               className="tooltip-trigger"
               tabIndex={0}
               aria-describedby="stack-tooltip"
+              onClick={handleTooltipTap}
             >
               Stack
             </span>
@@ -165,6 +195,7 @@ export default function Home() {
               className="tooltip-trigger"
               tabIndex={0}
               aria-describedby="roboticist-tooltip"
+              onClick={handleTooltipTap}
             >
               Roboticist
             </span>

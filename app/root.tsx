@@ -9,12 +9,6 @@ import type { LinksFunction, MetaFunction } from "react-router";
 import "@fontsource-variable/inter";
 import "./styles/global.css";
 
-export const meta: MetaFunction = () => {
-  return [
-    { name: "viewport", content: "width=device-width, initial-scale=1" },
-  ];
-};
-
 export const links: LinksFunction = () => {
   return [];
 };
@@ -24,6 +18,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
         {import.meta.env.DEV && (
