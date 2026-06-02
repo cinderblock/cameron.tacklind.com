@@ -36,6 +36,7 @@ const SPOTS = [
 
 const ALPHA = 0.002;
 const BETA = 0.0004;
+const DAMPING = 0.96;
 
 function useGradientMouse() {
   useEffect(() => {
@@ -67,6 +68,9 @@ function useGradientMouse() {
         const force = 600 / (dist + 8);
         const targetX = baseX + (dx / (dist + 1)) * force;
         const targetY = baseY + (dy / (dist + 1)) * force;
+
+        s.vx *= DAMPING;
+        s.vy *= DAMPING;
 
         const predX = s.x + s.vx;
         const predY = s.y + s.vy;
