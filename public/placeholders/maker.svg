@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Placeholder: maker">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7a3a0c"/>
+      <stop offset="100%" stop-color="#b07a1c"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <g transform="translate(400 300)" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-140" y="-100" width="280" height="200" rx="10" fill="rgba(0,0,0,0.15)"/>
+    <circle cx="-90" cy="-50" r="8" fill="rgba(255,255,255,0.85)" stroke="none"/>
+    <circle cx="-40" cy="-50" r="8" fill="rgba(255,255,255,0.85)" stroke="none"/>
+    <circle cx="10" cy="-50" r="8" fill="rgba(255,255,255,0.85)" stroke="none"/>
+    <path d="M-100 0 H100"/>
+    <path d="M-100 30 H60"/>
+    <path d="M-100 60 H100"/>
+    <path d="M70 50 L90 70 L120 40" stroke="rgba(255,255,255,0.95)"/>
+  </g>
+  <text x="400" y="490" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="rgba(255,255,255,0.9)">Maker</text>
+  <text x="400" y="520" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="rgba(255,255,255,0.55)">placeholder — swap with a photo</text>
+</svg>
