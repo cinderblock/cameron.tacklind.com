@@ -408,7 +408,7 @@ export default function Home() {
             <p className="section-lede">
               Working on something interesting?
             </p>
-            <nav className="social-links" aria-label="Social and contact links">
+            <nav className="social-links" aria-label="Social links">
               <a
                 href="https://github.com/cinderblock"
                 target="_blank"
