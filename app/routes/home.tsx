@@ -306,10 +306,6 @@ export default function Home() {
             </svg>
           </a>
         </nav>
-        <p className="blog-link">
-          I document my random projects at{" "}
-          <a href="https://arbitraryshit.com">ArbitraryShit.com</a>
-        </p>
       </section>
       <footer dangerouslySetInnerHTML={{ __html: "<!-- FDT -->" }} />
     </main>
