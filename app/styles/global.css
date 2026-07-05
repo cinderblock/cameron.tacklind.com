@@ -248,6 +248,12 @@ body {
   border-radius: 4px;
 }
 
+.blog-link {
+  margin-top: 2.5rem;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+}
+
 /* Skip link for accessibility */
 .skip-link {
   position: absolute;
