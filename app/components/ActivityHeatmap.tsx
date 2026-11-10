@@ -19,6 +19,11 @@ function formatDate(iso: string): string {
   return date.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric", year: "numeric" });
 }
 
+function formatMonth(iso: string): string {
+  const [y, m] = iso.split("-").map(Number);
+  return new Date(y, (m ?? 1) - 1, 1).toLocaleDateString(undefined, { month: "long", year: "numeric" });
+}
+
 export function ActivityHeatmap() {
   const cells = activity.cells as Cell[];
   const max = Math.max(1, activity.maxDaily);
@@ -35,6 +40,9 @@ export function ActivityHeatmap() {
   });
 
   const generated = new Date(activity.generatedAt);
+  const loggedSince = activity.firstDate
+    ? formatMonth(activity.firstDate)
+    : "recently";
 
   return (
     <div className="heatmap" aria-label="Weekly Claude prompt activity, last 53 weeks">
@@ -107,6 +115,11 @@ export function ActivityHeatmap() {
           Updated {generated.toLocaleDateString(undefined, { month: "short", day: "numeric" })}
         </span>
       </div>
+
+      <p className="heatmap-note">
+        My logs only go back to {loggedSince}. The real story starts earlier: I went all in on
+        Cursor around the start of 2025, and I haven't really looked at code myself since late 2025.
+      </p>
     </div>
   );
 }

@@ -461,6 +461,15 @@ body {
   opacity: 0.7;
 }
 
+.heatmap-note {
+  max-width: 60ch;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  user-select: text;
+}
+
 /* === Connect section (portrait + socials) === */
 
 .connect-inner {

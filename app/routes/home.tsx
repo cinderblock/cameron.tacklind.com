@@ -310,7 +310,7 @@ export default function Home() {
               Physical AI, before it had a name.
             </p>
             <p className="section-body">
-              Robots that think. Agents that build. Prompts logged live from my own Claude usage.
+              Robots that think. Agents that build. Below, every Claude prompt I've logged.
             </p>
           </header>
           <ActivityHeatmap />
