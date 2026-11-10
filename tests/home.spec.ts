@@ -6,7 +6,7 @@ test.describe("Home Page", () => {
   });
 
   test("has correct title", async ({ page }) => {
-    await expect(page).toHaveTitle("Cameron Tacklind - Complete Stack Roboticist");
+    await expect(page).toHaveTitle("Cameron Tacklind - Complete AI Stack Roboticist");
   });
 
   test("displays name heading", async ({ page }) => {
@@ -16,6 +16,7 @@ test.describe("Home Page", () => {
 
   test("displays tagline", async ({ page }) => {
     await expect(page.locator(".tagline")).toContainText("Complete");
+    await expect(page.locator(".tagline")).toContainText("AI");
     await expect(page.locator(".tagline")).toContainText("Stack");
     await expect(page.locator(".tagline")).toContainText("Roboticist");
   });
@@ -39,14 +40,14 @@ test.describe("Home Page", () => {
     const metaDescription = page.locator('meta[name="description"]');
     await expect(metaDescription).toHaveAttribute(
       "content",
-      "Cameron Tacklind is a complete stack roboticist — from BLDC to React and everything in between."
+      "Cameron Tacklind — Complete AI Stack Roboticist. From BLDC to LLMs, from robots to reason."
     );
   });
 
   test("has Open Graph tags", async ({ page }) => {
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
       "content",
-      "Cameron Tacklind - Complete Stack Roboticist"
+      "Cameron Tacklind - Complete AI Stack Roboticist"
     );
     await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
       "content",

@@ -90,6 +90,63 @@ Turn the current single-hero landing page into a multi-section scrolling site th
 - **Tooltip on mobile**: the existing focus-only tooltip behavior on small screens was preserved as-is. The tooltip arrow positioning script keeps working because tooltips use `getBoundingClientRect`, which is viewport-relative.
 - **No new dependencies added** — `ChevronDown` and `ArrowUpRight` were already in `lucide-react`.
 
+## Round 2 — AI section + Claude activity chart (2026-11-09)
+
+User asked to add AI/prompting/physical-AI angle and a GitHub-style weekly activity heatmap of real Claude usage.
+
+### Tagline changes
+
+- Meta title: `Cameron Tacklind - Complete AI Stack Roboticist`
+- Meta description: `Cameron Tacklind — Complete AI Stack Roboticist. From BLDC to LLMs, from robots to reason.`
+- Hero intro: `from Robots to Reason`
+- Hero tagline: `Complete AI Stack Roboticist` (AI inserted as a new tooltipped word between Complete and Stack)
+- New AI tooltip rows: Tools (Claude Code, MCP, Codex) · Models (Claude, GPT, Local) · Agents (Autonomous, Multi-Agent, Workflows) · Physical (Robot control, Vision, Embodied). Open question: are these the right rows for Cameron?
+
+### New AI scroll section (between Hero and Roboticist)
+
+- Single-column `.section-ai` layout (not photo+text split)
+- Heading `AI` · lede `Physical AI, before it had a name.` · body `Robots that think. Agents that build. Prompts logged live from my own Claude usage.`
+- No external CTA — the chart is the payload
+
+### Activity heatmap
+
+- `scripts/build-claude-activity.ts` scans `~/.claude/projects/**/*.jsonl`, counts real user prompts (non-sidechain, text content only) per local day, emits `app/data/claude-activity.json` with a 53×7 grid aligned to this Saturday.
+- `app/components/ActivityHeatmap.tsx` renders the grid (CSS grid, `minmax(0, 1fr)` so it shrinks on mobile without overflow), with month labels, Mon/Wed/Fri day labels, stats row (total prompts / active days / peak day / longest streak), GitHub-style legend, and an "Updated {date}" note.
+- Theme-aware (light + dark variables), `?light` override preserved via `data-force-light` guard already present in global.css.
+- First run: 1,608 files scanned, 9,362 lifetime prompts; window 2025-11-09 → 2026-11-14 with 70 active days, 656 peak day, 30 day longest streak.
+
+### Daily regen (needs local setup)
+
+CF Pages cannot reach `~/.claude/projects`, so the generator runs locally on Cameron's machine. Options to automate:
+
+**Option A — Windows Task Scheduler** (recommended):
+1. `schtasks /create /sc daily /st 06:00 /tn "cameron.tacklind.com-activity" /tr "pwsh -NoProfile -Command \"cd 'C:\Users\camer\git\Personal Projects\cameron.tacklind.com'; bun run activity; git add app/data/claude-activity.json; git diff --staged --quiet || (git commit -m 'Daily Claude activity refresh'; git push)\""`
+2. Scheduler runs the job at 6 AM local; if the JSON changed, it commits and pushes, triggering a CF Pages rebuild of the active branch.
+
+**Option B — manual**: `bun run activity && git add app/data/claude-activity.json && git commit -m "Refresh Claude activity" && git push` whenever Cameron wants to refresh.
+
+### Files changed
+
+- `scripts/build-claude-activity.ts` (new)
+- `app/data/claude-activity.json` (new, generated)
+- `app/components/ActivityHeatmap.tsx` (new)
+- `app/routes/home.tsx` (tagline + AI tooltip + AI section + import)
+- `app/styles/global.css` (section-ai + heatmap styles)
+- `tests/home.spec.ts` (updated for new title/description/tagline tokens)
+- `package.json` (added `activity` script)
+
+### Verified
+
+- `bun run typecheck` clean
+- `bun run build` SSG prerender succeeds
+- `bun run test --project=chromium` 7/7 pass
+- Visual check 1400×900 + 420×900 (mobile), dark + light modes, AI tooltip hover
+
+### Open questions for round 2
+
+1. AI tooltip rows — are Tools/Models/Agents/Physical the right four, with these exact entries?
+2. Daily regen — want me to set up the Windows Task now, or leave that to you?
+
 ---
 
 Plan path: `plans/redesign-scroll-sections.md`

@@ -10,20 +10,21 @@ import {
   ChevronDown,
   ArrowUpRight,
 } from "lucide-react";
+import { ActivityHeatmap } from "../components/ActivityHeatmap";
 
 export const meta: MetaFunction = () => {
   const description =
-    "Cameron Tacklind is a complete stack roboticist — from BLDC to React and everything in between.";
+    "Cameron Tacklind — Complete AI Stack Roboticist. From BLDC to LLMs, from robots to reason.";
   return [
-    { title: "Cameron Tacklind - Complete Stack Roboticist" },
+    { title: "Cameron Tacklind - Complete AI Stack Roboticist" },
     { name: "description", content: description },
     { name: "author", content: "Cameron Tacklind" },
     { property: "og:type", content: "website" },
-    { property: "og:title", content: "Cameron Tacklind - Complete Stack Roboticist" },
+    { property: "og:title", content: "Cameron Tacklind - Complete AI Stack Roboticist" },
     { property: "og:description", content: description },
     { property: "og:url", content: "https://cameron.tacklind.com" },
     { name: "twitter:card", content: "summary" },
-    { name: "twitter:title", content: "Cameron Tacklind - Complete Stack Roboticist" },
+    { name: "twitter:title", content: "Cameron Tacklind - Complete AI Stack Roboticist" },
     { name: "twitter:description", content: description },
   ];
 };
@@ -139,7 +140,7 @@ export default function Home() {
       <section id="hero" className="snap hero">
         <div className="hero-inner">
           <h1>Cameron Tacklind</h1>
-          <p className="intro">from Robots to React</p>
+          <p className="intro">from Robots to Reason</p>
           <p className="tagline">
             <span className="tooltip-wrapper">
               <span
@@ -172,6 +173,34 @@ export default function Home() {
                 <span className="tooltip-row">
                   <span className="tooltip-label">Design</span>
                   <span className="tooltip-value">SolidWorks, Altium, Mathematica</span>
+                </span>
+              </span>
+            </span>{" "}
+            <span className="tooltip-wrapper">
+              <span
+                className="tooltip-trigger"
+                tabIndex={0}
+                aria-describedby="ai-tooltip"
+                onClick={handleTooltipTap}
+              >
+                AI
+              </span>
+              <span className="tooltip" id="ai-tooltip" role="tooltip">
+                <span className="tooltip-row">
+                  <span className="tooltip-label">Tools</span>
+                  <span className="tooltip-value">Claude Code, MCP, Codex</span>
+                </span>
+                <span className="tooltip-row">
+                  <span className="tooltip-label">Models</span>
+                  <span className="tooltip-value">Claude, GPT, Local</span>
+                </span>
+                <span className="tooltip-row">
+                  <span className="tooltip-label">Agents</span>
+                  <span className="tooltip-value">Autonomous, Multi-Agent, Workflows</span>
+                </span>
+                <span className="tooltip-row">
+                  <span className="tooltip-label">Physical</span>
+                  <span className="tooltip-value">Robot control, Vision, Embodied</span>
                 </span>
               </span>
             </span>{" "}
@@ -267,10 +296,25 @@ export default function Home() {
           type="button"
           className="scroll-cue"
           aria-label="Scroll to next section"
-          onClick={() => scrollToId("roboticist")}
+          onClick={() => scrollToId("ai")}
         >
           <ChevronDown size={28} aria-hidden="true" />
         </button>
+      </section>
+
+      <section id="ai" className="snap section section-ai">
+        <div className="section-inner ai-inner">
+          <header className="section-copy ai-copy">
+            <h2>AI</h2>
+            <p className="section-lede">
+              Physical AI, before it had a name.
+            </p>
+            <p className="section-body">
+              Robots that think. Agents that build. Prompts logged live from my own Claude usage.
+            </p>
+          </header>
+          <ActivityHeatmap />
+        </div>
       </section>
 
       <section id="roboticist" className="snap section section-photo-left">

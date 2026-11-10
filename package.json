@@ -8,7 +8,8 @@
     "preview": "vite preview --outDir build/client",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "activity": "bun scripts/build-claude-activity.ts"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",
