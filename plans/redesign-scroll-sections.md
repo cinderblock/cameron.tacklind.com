@@ -142,6 +142,18 @@ CF Pages cannot reach `~/.claude/projects`, so the generator runs locally on Cam
 - `bun run test --project=chromium` 7/7 pass
 - Visual check 1400×900 + 420×900 (mobile), dark + light modes, AI tooltip hover
 
+### Finding: `~/.claude/projects` is missing most of the history (2026-11-09)
+
+The first chart showed only 70 active days. Cameron has far more.
+
+- `~/.claude/projects` transcripts only go back to file mtimes of 2026-08-26 (4 files in Aug, 187 in Sep, 1,086 in Oct). Older transcripts are gone, even though `cleanupPeriodDays` is now 36500. Likely cause: Claude Code's default 30-day cleanup ran before the setting was raised. Unconfirmed.
+- `~/.claude/history.jsonl` has only 206 prompts across 19 days (2026-01-14 → 2026-10-16). Too sparse to use alone.
+- **T3's `~/.t3/userdata/statev2.sqlite` holds the complete record.** `orchestration_v2_projection_messages` has 19,060 `role=user` rows from 2026-03-09 to now, across 213 distinct days. Provider via `orchestration_v2_projection_runs.provider`: `claudeAgent` 19,046 rows over 211 days; `codex` 10 rows; `claudeAgent_claude_api` 6 rows. `payload_json.createdBy` separates typed prompts (`user`, 16,486) from agent-created ones (`agent`, 2,576: delegations, scheduled tasks).
+- `~/.codex/sessions` is empty. The Claude desktop app has no local `.jsonl` transcripts.
+- Open it read-only (`bun:sqlite` `{readonly:true}`). It's 8.3 GB and live.
+
+Proposed generator change: use T3 as the primary source, and fall back to `~/.claude/projects` plus `history.jsonl` only for days T3 doesn't cover (before 2026-03-09). Don't sum the two sources: T3-driven sessions also write `~/.claude/projects` transcripts, so adding them would double-count.
+
 ### Open questions for round 2
 
 1. AI tooltip rows — are Tools/Models/Agents/Physical the right four, with these exact entries?
