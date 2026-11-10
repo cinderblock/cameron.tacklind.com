@@ -113,7 +113,10 @@ User asked to add AI/prompting/physical-AI angle and a GitHub-style weekly activ
 - `scripts/build-claude-activity.ts` scans `~/.claude/projects/**/*.jsonl`, counts real user prompts (non-sidechain, text content only) per local day, emits `app/data/claude-activity.json` with a 53×7 grid aligned to this Saturday.
 - `app/components/ActivityHeatmap.tsx` renders the grid (CSS grid, `minmax(0, 1fr)` so it shrinks on mobile without overflow), with month labels, Mon/Wed/Fri day labels, stats row (total prompts / active days / peak day / longest streak), GitHub-style legend, and an "Updated {date}" note.
 - Theme-aware (light + dark variables), `?light` override preserved via `data-force-light` guard already present in global.css.
-- First run: 1,608 files scanned, 9,362 lifetime prompts; window 2025-11-09 → 2026-11-14 with 70 active days, 656 peak day, 30 day longest streak.
+- First run (transcripts only, superseded): 9,362 prompts, 70 active days, 656 peak. The 656 included delegated child sessions as if typed.
+- Current source: T3 `statev2.sqlite`, counting only messages typed by the user (`createdBy = user`) in Claude-provider threads; transcripts and `history.jsonl` fill days before T3 (max of the two per day, never summed). Result: 16,673 prompts since 2026-01-13, 208 active days, 253 peak day (2026-11-02), 41-day longest streak.
+- Typecheck needs `@types/bun` (dev dependency) for `bun:sqlite`. It's referenced only in the script via `/// <reference types="bun" />`, so Bun globals stay out of app code.
+- Dev-server gotcha: after any `bun add`, Vite's dependency cache can serve mixed bundle versions, which shows up as "Invalid hook call / reading 'useContext'". Fix: stop the server, delete `node_modules/.vite`, run `bun run dev -- --force`, then reload the page once dependency optimization finishes. Production builds aren't affected.
 
 ### Daily regen (needs local setup)
 
@@ -152,7 +155,7 @@ The first chart showed only 70 active days. Cameron has far more.
 - `~/.codex/sessions` is empty. The Claude desktop app has no local `.jsonl` transcripts.
 - Open it read-only (`bun:sqlite` `{readonly:true}`). It's 8.3 GB and live.
 
-Proposed generator change: use T3 as the primary source, and fall back to `~/.claude/projects` plus `history.jsonl` only for days T3 doesn't cover (before 2026-03-09). Don't sum the two sources: T3-driven sessions also write `~/.claude/projects` transcripts, so adding them would double-count.
+**Implemented** (user approved 2026-11-09): use T3 as the primary source, and fall back to `~/.claude/projects` plus `history.jsonl` only for days T3 doesn't cover (before 2026-03-09). Don't sum the two sources: T3-driven sessions also write `~/.claude/projects` transcripts, so adding them would double-count.
 
 ### Open questions for round 2
 
