@@ -118,7 +118,7 @@ export function ActivityHeatmap() {
 
       <p className="heatmap-note">
         My logs only go back to {loggedSince}. The real story starts earlier: I went all in on
-        Cursor around the start of 2025, and I haven't really looked at code myself since late 2025.
+        Cursor in February 2025, and I haven't really looked at code myself since late 2025.
       </p>
     </div>
   );

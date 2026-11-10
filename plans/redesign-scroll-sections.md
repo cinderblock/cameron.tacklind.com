@@ -157,6 +157,14 @@ The first chart showed only 70 active days. Cameron has far more.
 
 **Implemented** (user approved 2026-11-09): use T3 as the primary source, and fall back to `~/.claude/projects` plus `history.jsonl` only for days T3 doesn't cover (before 2026-03-09). Don't sum the two sources: T3-driven sessions also write `~/.claude/projects` transcripts, so adding them would double-count.
 
+### Pre-log history caption (2026-11-10)
+
+A note under the chart explains that the logs start later than Cameron's real AI use. Facts used, all confirmed:
+
+- Cursor: a $192 yearly Cursor Pro purchase on 2025-02-04 at about 6–8 PM PST (2025-02-05 02:07–04:18Z). The card was declined, then a Stripe ACH authorization was signed. The earliest Cursor billing email is from then. Caption says "February 2025".
+- Stopped looking at code: late 2025. Cameron wrote "Nov 2026" and confirmed late 2025 was what they meant.
+- The "logs go back to" month comes from `firstDate` in the JSON, so it updates on its own.
+
 ### Open questions for round 2
 
 1. AI tooltip rows — are Tools/Models/Agents/Physical the right four, with these exact entries?
