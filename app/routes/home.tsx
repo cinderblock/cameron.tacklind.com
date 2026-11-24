@@ -14,7 +14,7 @@ import { ActivityHeatmap } from "../components/ActivityHeatmap";
 
 export const meta: MetaFunction = () => {
   const description =
-    "Cameron Tacklind — Complete AI Stack Roboticist. From BLDC to LLMs, from robots to reason.";
+    "Complete AI Stack Roboticist in the San Francisco Bay Area. From BLDC to LLMs, from robots to reason.";
   return [
     { title: "Cameron Tacklind - Complete AI Stack Roboticist" },
     { name: "description", content: description },
@@ -448,10 +448,11 @@ export default function Home() {
             />
           </figure>
           <div className="section-copy">
-            <h2>Reach out</h2>
+            <h2>Say hi</h2>
             <p className="section-lede">
-              Working on something interesting?
+              Building something fun? Let's talk.
             </p>
+            <p className="section-body">Based in the San Francisco Bay Area.</p>
             <nav className="social-links" aria-label="Social links">
               <a
                 href="https://github.com/cinderblock"

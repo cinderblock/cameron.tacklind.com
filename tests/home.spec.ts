@@ -40,7 +40,7 @@ test.describe("Home Page", () => {
     const metaDescription = page.locator('meta[name="description"]');
     await expect(metaDescription).toHaveAttribute(
       "content",
-      "Cameron Tacklind — Complete AI Stack Roboticist. From BLDC to LLMs, from robots to reason."
+      "Complete AI Stack Roboticist in the San Francisco Bay Area. From BLDC to LLMs, from robots to reason."
     );
   });
 
