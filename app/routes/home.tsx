@@ -442,8 +442,8 @@ export default function Home() {
         <div className="section-inner connect-inner">
           <figure className="section-figure portrait">
             <img
-              src="/placeholders/portrait.svg"
-              alt="Placeholder for a portrait photo of Cameron."
+              src="/photos/portrait.jpg"
+              alt="Cameron smiling in a sandstone slot canyon, somewhere in Montana."
               loading="lazy"
             />
           </figure>
